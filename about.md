@@ -4,12 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hello, I am Matthew a Computer Science student from Northern Ireland. I blog about web development, capture the flag challenges, TryHackMe/HackTheBox rooms and other security related topics that I find interesting
 
-### More Information
+<!-- ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+A place to include any other types of information that you'd like to include about yourself. -->
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[gg0h.ctf@gmail.com](mailto:gg0h.ctf@gmail.com)
