@@ -1,9 +1,8 @@
 ---
 layout: post
-title: You're up and running!
+title: This is my first post!
 ---
-
-# This is my first post!
 
 - test
 - abc
+- 123
