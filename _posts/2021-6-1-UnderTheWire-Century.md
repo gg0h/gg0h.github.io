@@ -3,7 +3,7 @@ layout: post
 title: Under The Wire
 ---
 
-![](_attachments/utw-bg.png)
+![](_posts/attachments/utw-bg.png)
 
 My PowerShell skills are... _lacking_. I very often need to look up How to do X, how to do Y,
 you get the idea. So I've decided to change that by working through UnderTheWire wargames, an 
@@ -18,9 +18,11 @@ login to the machine
 century1:century1
 
 connect with ssh
-```
+
+```powershell
 ssh century1@century.underthewire.tech
 ```
+
 all further ssh connections will be in this format (I think, if different I will elaborate) so I won't repeat these for each challenge
 
 ## Century - 1 -> 2
@@ -28,7 +30,7 @@ The password for Century2 is the build version of the instance of PowerShell ins
 
 After some time fumbling looking for the wrong thing I found:
 
-```
+```powershell
 PS C:\users\century1\desktop> $PSVersionTable
 
 Name                           Value                                               
@@ -43,7 +45,7 @@ PSRemotingProtocolVersion      2.3
 SerializationVersion           1.1.0.1    
 ```
 
-```
+```powershell
 BuildVersion                   10.0.14393.3866
 ```
 
@@ -64,7 +66,8 @@ century3:invoke-webrequest443
 The password for Century4 is the number of files on the desktop.
 
 with some stack-overflow browsing I have my answer
-```
+
+```powershell
 Write-Host ( Get-ChildItem C:\users\century3\desktop | Measure-Object).Count;
 ```
 
@@ -73,9 +76,11 @@ century4:123
 The password for Century5 is the name of the file within a directory on the desktop that has spaces in its name.
 
 I think I am misunderstanding this one somehow. I thought the file inside the directory should have spaces in it's name so I came up with the command
-```
+
+```powershell
 Get-ChildItem -Path .\ -Recurse | Where-Object {$_.Name -like "* *"}
 ```
+
 but this only returns the directory `Not Me`
 reading again I think maybe it means a file within `Not Me` but this directory
 with some trial and error there is a file in `OpenMe` called `61580` which turned out to be the password, but since neither have whitespace in their name I am at a total loss as to what the intended solution was here.
@@ -87,7 +92,8 @@ century5:61580
 The password for Century6 is the short name of the domain in which this system resides in PLUS the name of the file on the desktop.
 
 running:
-```
+
+```powershell
 PS C:\users\century5\desktop> get-addomain                                                                                                      
 AllowedDNSSuffixes                 : {}
 ChildDomains                       : {}
@@ -133,9 +139,11 @@ which is correct
 ## Century - 6 -> 7
 The password for Century7 is the number of folders on the desktop.
 I believe this should just be a tweak on our earlier command to count directories
-```
+
+```powershell
 Write-Host ( Get-ChildItem . -Attributes Directory | Measure-Object).Count; 
 ```
+
 I actually repeated without `-Attributes Directory`  and it gave the same number, so filtering was really necessary but still good practice
 
 century7:197
@@ -146,7 +154,8 @@ The password for Century8 is in a readme file somewhere within the contacts, des
 I think here I can reuse the recursive filename search technique I used when looking for the whitespace
 
 running:
-```
+
+```powershell
 Get-ChildItem -Path .\ -Recurse | Where-Object {$_.Name -like "*readme*"}
 ```
 
@@ -158,11 +167,12 @@ century8:7points
 The password for Century9 is the number of unique entries within the file on the desktop.
 
 with some quick research I put together a command to get an array of the unique content that can then be put into the count structure I've used before
-```
+
+```powershell
 Get-Content .\unique.txt | Select-Object -unique
 ```
 
-```
+```powershell
 Write-Host (Get-Content .\unique.txt | Select-Object -unique | Measure-Object).Count
 ```
 
@@ -179,12 +189,13 @@ hmm not that helpful immediately (or I am oblivious) but I know it returns an ar
 
 with
 
-```
+```powershell
 (get-content .\Word_File.txt)[161]
 ```
+
 I am returned `i` so clearly I am indexing the characters instead of the words, If I can make it return the words in the array this approach should work. I seen a delimiter option in the help command, maybe this is the delimiter to split upon.
 
-```
+```powershell
 (get-content .\Word_File.txt -Delimiter " ")[161]
 ```
 
@@ -193,7 +204,8 @@ this returns `nonapplicabness` exactly what I wanted. Now provided these arrays 
 century10:nonapplicabness
 
 yes it seems I was wrong the array is zero indexed... repeating the command with an index of 160
-```
+
+```powershell
 (get-content .\Word_File.txt -Delimiter " ")[160]
 ```
 
@@ -207,7 +219,7 @@ with the techniques I've developed so far, all I need is how to get the Windows 
 
 with some trial and erro of a few commands I arrived at
 
-```
+```powershell
 (get-wmiobject win32_service | where-object {$_.Name -like "*wuauserv*"} | Select Description).Description
 ```
 
@@ -217,9 +229,10 @@ now to index this for the words we want
 
 upon trying this I realised I forgot to split the string into an array
 
-```
+```powershell
 (get-wmiobject win32_service | where-object {$_.Name -like "*wuauserv*"} | Select Description).Description.Split(" ")
 ```
+
 indexing for the 8th element (7th index) we get `updates`
 indexing for the 10th element (9th index) we get `windows`
 
@@ -230,8 +243,9 @@ centruy11:windowsupdates110
 ## Century 11-> 12
 The password for Century12 is the name of the hidden file within the contacts, desktop, documents, downloads, favorites, music, or videos folder in the user’s profile.
 
-we can do this with a command similar to the recursive search from before, adding the    -Hidden argukment
-```
+we can do this with a command similar to the recursive search from before, adding the    -Hidden argument
+
+```powershell
 Get-ChildItem -Path .\ -Recurse -Hidden 
 ```
 
@@ -245,7 +259,8 @@ The password for Century13 is the description of the computer designated as a Do
 filename: \_things
 
 it took quite a while to find the right command, eventually I settled on 
-```
+
+```powershell
 Get-adcomputer -filter * -Property Description
 ```
 we see a description of i\_authenticate
@@ -255,9 +270,11 @@ century13:i_authenticate_things
 The password for Century14 is the number of words within the file on the desktop.
 
 we can do similar to before, split into array -> put into count structure used above
-```
+
+```powershell
 Write-Host (get-content .\countmywords -delimiter " " | measure-object).count
 ```
+
 755
 
 century14:755
@@ -266,7 +283,7 @@ The password for Century15 is the number of times the word “polo” appears wi
 
 I used a sligthly different approach to counting here to mix things up
 
-```
+```powershell
 (get-content .\countpolos -delimiter " " | select-string -pattern "^polo").length
 ```
 
