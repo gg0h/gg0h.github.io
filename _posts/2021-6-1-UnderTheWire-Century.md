@@ -3,7 +3,7 @@ layout: post
 title: Under The Wire
 ---
 
-![](images/attachments/utw-bg.png)
+![](/images/attachments/utw-bg.png)
 
 My PowerShell skills are... _lacking_. I very often need to look up How to do X, how to do Y,
 you get the idea. So I've decided to change that by working through UnderTheWire wargames, an 
