@@ -579,7 +579,7 @@ shellcode+= "\x3e"
 
 running the script
 
-![](/images/attachments/"Pasted image 20210605162843.png")
+![](/images/attachments/Pasted&#32;image&#32;20210605162843.png)
 
 we get back a reverse shell
 
