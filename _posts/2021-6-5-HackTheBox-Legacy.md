@@ -7,7 +7,7 @@ This post is an overview of my time working through the box "Legacy" found in [H
 
 ---
 
-![](/images/attachments/Pasted\ image\ 20210605163943.png)
+![](/images/attachments/Pasted&#32;image&#32;20210605163943.png)
 
 As part of the PEH course offered by Heath Adams (thecybermentor) I am completing a series of Hack the Box machines, the first of these is Legacy.
 
