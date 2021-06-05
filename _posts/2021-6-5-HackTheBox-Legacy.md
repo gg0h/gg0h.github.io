@@ -7,7 +7,7 @@ This post is an overview of my time working through the box "Legacy" found in [H
 
 ---
 
-!()[/_posts/attachments/Pasted image 20210605163943.png]
+![](/images/attachments/Pasted image 20210605163943.png)
 
 As part of the PEH course offered by Heath Adams (thecybermentor) I am completing a series of Hack the Box machines, the first of these is Legacy.
 
@@ -579,7 +579,7 @@ shellcode+= "\x3e"
 
 running the script
 
-![[./attachments/Pasted image 20210605162843.png]]
+![](/images/attachments/Pasted image 20210605162843.png)
 
 we get back a reverse shell
 
