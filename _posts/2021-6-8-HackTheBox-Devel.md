@@ -133,7 +133,8 @@ MS13-081 patch is NOT installed 7SP0/SP1_x86-track_popup_menu)
 
 with some google fu, I found a binary to exploit one of these [here](https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS14-040). Uploading it via ftp and running it we get system. Now it is simply the case of reading the flags
 
-```c:\Users\babis\Desktop>type user.txt.txt                                       
+```
+c:\Users\babis\Desktop>type user.txt.txt                                       
 type user.txt.txt                                         
 <flag_here>
 ```
