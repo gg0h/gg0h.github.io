@@ -6,8 +6,7 @@ title: Hack The Box - Legacy
 This post is an overview of my time working through the box "Legacy" found in [HackTheBox](https://www.hackthebox.eu)
 
 ---
-
-![](/images/attachments/Pasted&#32;image&#32;20210605163943.png)
+![](/images/attachments/Pasted&#32;image&#32;20210707143217.png)
 
 As part of the PEH course offered by Heath Adams (thecybermentor) I am completing a series of Hack the Box machines, the first of these is Legacy.
 

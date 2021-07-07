@@ -6,7 +6,8 @@ title: Hack The Box - Devel
 This post is an overview of my time working through the box "Devel" found in [HackTheBox](https://www.hackthebox.eu)
 
 ---
-![](/images/attachments/Pasted&#32;image&#32;20210608130802.png)
+![](/images/attachments/Pasted&#32;image&#32;20210707143314.png)
+
 
 ### Nmap enumeration
 

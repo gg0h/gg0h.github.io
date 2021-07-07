@@ -6,8 +6,7 @@ title: Hack The Box - Legacy
 This post is an overview of my time working through the box "Devel" found in [HackTheBox](https://www.hackthebox.eu)
 
 ---
-
-![](Pasted%20image%2020210707132253.png)
+![](/images/attachments/Pasted&#32;image&#32;20210707143409.png)
 
 This my second time doing an Active Directory based machine from Hack The Box having stumbled through Forest earlier this month, but this one went a lot more smoothly :)
 
