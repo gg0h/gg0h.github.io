@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hack The Box - Legacy
+title: Hack The Box - Active
 ---
 
 This post is an overview of my time working through the box "Devel" found in [HackTheBox](https://www.hackthebox.eu)
