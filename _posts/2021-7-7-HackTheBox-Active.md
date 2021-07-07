@@ -156,9 +156,8 @@ GPPstillStandingStrong2k18
 
 now we have credentials
 
-| user | password | service| notes|
-|--- |--- |--- | ---|
-| SVC_TGS | GPPstillStandingStrong2k18 | domain | |
+
+ SVC_TGS:GPPstillStandingStrong2k18
 
 ## Kerberoasting
 we saw earlier that port 88 was open so now that we have credentials we can attempt a technique called "Kerberoasting".
@@ -236,10 +235,8 @@ $krb5tgs$23$*Administrator$ACTIVE.HTB$active.htb/Administrator*$5b93b01640d5ccc9
 
 ```
 
-| user | password | service| notes|
-|--- |--- |--- | ---|
-| SVC_TGS | GPPstillStandingStrong2k18 | domain | |
-| Administrator | Ticketmaster1968 | domain | |
+
+Administrator:Ticketmaster1968
 
 Now we can use another impacket tool, `psexec` to get a shell as system
 
