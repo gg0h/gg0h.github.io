@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Hack The Box - Legacy
+title: Hack The Box - Devel
 ---
 
 This post is an overview of my time working through the box "Devel" found in [HackTheBox](https://www.hackthebox.eu)
 
 ---
-![](/_posts/attachments/Pasted&#32;image&#32;20210608130802.png)
+![](/images/attachments/Pasted&#32;image&#32;20210608130802.png)
 
 ### Nmap enumeration
 
@@ -52,7 +52,7 @@ and based on the file preview we are given:
 
 I think it is quite likely this is the base directory of the webserver on port 80. Navigating to http://10.10.10.5/welcome.png I confirm this:
 
-![](/_posts/attachments/Pasted&#32;image&#32;20210608132821.png)
+![](/images/attachments/Pasted&#32;image&#32;20210608132821.png)
 
 ## Reverse shell
 with this knowledge we can generate an aspx reverse shell with msfvenom, upload it via the ftp server and then triger it via the web server.
