@@ -12,7 +12,7 @@ A one-way ticket to starting your cybersecurity career on [TryHackMe](https://tr
 
 [TryHackMe](https://tryhackme.com) is an interactive online platform to improve your skills and knowledge across both the offensive and defensive domains of cybersecurity through a series of brief, gamified real-world lab environments. TryHackMe features a large amount of free content, as well as some (very reasonably priced at £8pcm!) paid content and is suitable for both beginners and infosec veterans. 
 
-The content I'll be discussing today is targeted at the former and in my opinion, is  **_perfect_** for dipping your toes into the cybersecuritry world, stick around for a few minutes and let me convince you why!
+The content I'll be discussing today is targeted at the former and in my opinion, is  **_perfect_** for dipping your toes into the cybersecurity world, stick around for a few minutes and let me convince you why!
 
 # What is Pre Security?
 Just this month TryHackMe have unveiled their newest learning pathway, **Pre Security**. This pathway will teach you the necessary fundamentals to give you a strong foundation for your journey in cybersecurity. Having just finished today, I can say this pathway is ideal for someone who wants to break into cybersecurity (and exactly what I was looking for 8 months ago when I got started!). Completing this pathway will give you a strong first step into cybersecurity and the confidence to continue that journey.
@@ -32,23 +32,23 @@ The first section covered is networking a crucial topic to understand for cybers
 # Understanding the web
 ![](/images/attachments/Pasted&#32;image&#32;20210708174446.png)
 
-The next section teaches you all about website fundamentals, diving into the DNS and HTTP protocols followed by the "Putting it all together" room. I really enjoyed this one, the final exercise has you put in order a series of events that take place when you type a website into your browser. This is a nice conclusion to the section where all the pieces of information introduced slide into place creating a cohesive understanding.
+The next section teaches you all about website fundamentals, diving into the DNS and HTTP protocols followed by the "Putting it all together" room. I enjoyed this one, the final exercise has you put in order a series of events that take place when you type a website into your browser. This is a nice conclusion to the section where all the pieces of information introduced slide into place creating a cohesive understanding.
 
 # Operating system fundamentals
-We next move onto operating systems, going over the basics of Linux and Windows OS. Both these section feature in browser interactive machines, so no need to spin up a VM you can dive straight in!
+We next move onto operating systems, going over the basics of Linux and Windows OS. Both these sections feature in browser interactive machines, so no need to spin up a VM you can dive straight in!
 ![](/images/attachments/Pasted&#32;image&#32;20210708174552.png)
-The linux section guides you through all the basic commands needed to work your way around a Linux terminal. All commands can be experimented with uusing the in browser machine and your understanding is verified by the room questions. Here is a quick look at the in browser machine:
+The Linux section guides you through all the basic commands needed to work your way around a Linux terminal. All commands can be experimented with using the in-browser machine and your understanding is verified by the room questions. Here is a quick look at the in-browser machine:
 
 ![](/images/attachments/Pasted&#32;image&#32;20210708183139.png)
 
-The last section is covering the fundamentals of Window operating system.
+The last section is covering the fundamentals of the Windows operating system.
 
 ![](/images/attachments/Pasted&#32;image&#32;20210708174615.png)
 
-These rooms again give you an in browser machine experience, this time with a Graphical User Interface (GUI). You can also connect with RDP if you'd prefer.
-Covered are many of the basic features of the operating system, but also some not-so basics. As a non beginner I even learned a thing or two about some of the utilities hidden within `MSConfig`, covered in "Windows Fundamentals 2".
+These rooms again give you an in-browser machine experience, this time with a Graphical User Interface (GUI). You can also connect with RDP if you'd prefer.
+Covered are many of the basic features of the operating system, but also some not-so basics. As a non-beginner, I even learned a thing or two about some of the utilities hidden within `MSConfig`, covered in "Windows Fundamentals 2".
 
-A look at the in browser windows machine:
+A look at the in-browser windows machine:
 
 ![](/images/attachments/Pasted&#32;image&#32;20210708184346.png)
 # Completion
