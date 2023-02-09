@@ -9,8 +9,7 @@ Simple File Server was a medium difficulty web challenge from idekCTF 2022. We a
 
 The challenge included a fairly simple web application. There are both login and register options. We register a user `guest:guest` and continue. We are now presented with a file upload functionality.
 
-[![](assets/image/attachments/2023-02-07-idekCTF2022-simple-file-server.png)](assets/image/attachments/2023-02-07-idekCTF2022-simple-file-server.png)
-{:.glightbox}
+[![](/assets/image/attachments/2023-02-07-idekCTF2022-simple-file-server.png)](/assets/image/attachments/2023-02-07-idekCTF2022-simple-file-server.png){:.glightbox}
 
 We see we can upload a zip file and it will be automatically extracted. Let's look at the code for the endpoint.
 
