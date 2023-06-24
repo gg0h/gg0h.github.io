@@ -158,7 +158,7 @@ We have control over the serialized object in the database, and from our prelimi
 ...
 ```
 
-So we have a PHP deserialization vulnerability. Deserialization in PHP is not as easy to exploit as in languages such as Python, where a universal payload can be used, rather it depends on what classes are available in scope when the object is deserialized. We need to look among these classes to find one with a \_\_wakeup, \_\_destruct (or others) method that will let us do something malicious. Sometimes multiple of these must be chained together to achieve what we desire, these are commonly known as gadgets. More info can be found at [PHP Object Injection | OWASP Foundation](https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection).
+So we have a PHP deserialization vulnerability. Deserialization in PHP is not as easy to exploit as in languages such as Python, where a universal payload can be used, rather it depends on what classes are available in scope when the object is deserialized. We need to look among these classes to find one with a \_\_wakeup, \_\_destruct (or others) method that will let us do something malicious. Sometimes multiple of these must be chained together to achieve what we desire, these are commonly known as gadgets. More info can be found at [PHP Object Injection - OWASP Foundation](https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection).
 
 Examining the code base of the frontend and backend manually there are no obvious candidates, so we must look into the libraries used. Fortunately we can use an open source project called [PHP Generic Gadget Chains](https://github.com/ambionics/phpggc), which keeps track of these exploitable gadgets in open source PHP libraries.
 
