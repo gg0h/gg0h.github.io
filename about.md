@@ -4,7 +4,7 @@ title: $whoami
 permalink: /about/
 ---
 
-Hello, I am Matthew a Computer Science student from Northern Ireland. I blog about web development, capture the flag challenges, TryHackMe/HackTheBox rooms and other security related topics that I find interesting
+Hello, I'm Matthew. This is a simple blog for security topics interesting to me.
 
 ###### HackTheBox
 
