@@ -42,11 +42,11 @@ public function getProducts($query) {
 
 We can trigger this from the frontend to see how it is called.
 
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-aggregation-example.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-aggregation-example.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-aggregation-example.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-aggregation-example.png){:.glightbox}
 
-It is using the $match aggregation by default. With some research into MongoDB documentation we discovered the $lookup aggregation, which allows pulling in data from other collections. We can make a request like so to include the 'users' collection.
+It is using the `$match` aggregation by default. With some research into MongoDB documentation we discovered the `lookup` aggregation, which allows pulling in data from other collections. We can make a request like so to include the 'users' collection.
 
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-lookup.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-lookup.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-lookup.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-lookup.png){:.glightbox}
 
 ### Second Vulnerability - mass assignment
 
@@ -132,13 +132,13 @@ The serialized object in the "access" variable controls access to certain sectio
 ```
 
 Before:
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-before-serial.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-before-serial.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-before-serial.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-before-serial.png){:.glightbox}
 
 Sending the request to use mass assignment:
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-mass-assign.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-mass-assign.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-mass-assign.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-mass-assign.png){:.glightbox}
 
 Afterwards the orders tab is no longer available:
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-after.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-after.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-after.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-after.png){:.glightbox}
 
 ### Third Vulnerability - Deserialization
 
@@ -182,7 +182,7 @@ $ phpggc -h
 $ ~/challenges/web_unearthly_shop/phpggc/phpggc -l | grep -v NAME | grep -v Chains | grep -v '\-\-\-' | cut -f 1 -d ' ' | while read -r line; do ~/challenges/web_unearthly_shop/phpggc/phpggc $line --test-payload 2>/dev/null | grep 'SUCCESS' && echo $line ; done
 ```
 
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-phpggc.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-phpggc.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-phpggc.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-phpggc.png){:.glightbox}
 
 "Great, there are valid gadgets!" you might be thinking, but it's not quite that simple. The deserialization occurs in the backend application, so the backend autoload functionality cannot automatically include the classes required for the gadget from the frontend libraries. To get at the frontend classes we somehow need to include the frontend Composer autoload file, at `frontend/vendor/autoload.php`, into the backend scope . Let's take another look at `backend/index.php` to see how the autoloading is done.
 
@@ -332,9 +332,9 @@ after these manual tweaks, we have the payload:
 Sending this payload in the mass assignment vulnerability from before, and then logging in again to trigger deserialization, we get the flag.
 
 
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-assign-exploit.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-assign-exploit.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-assign-exploit.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-assign-exploit.png){:.glightbox}
 
-[![](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-trigger-deserial.png)](assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-trigger-deserial.png){:.glightbox}
+[![](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-trigger-deserial.png)](/assets/image/attachments/2023-06-24-HTBCA-Unearthly-Shop-trigger-deserial.png){:.glightbox}
 
 Stitching all of these individual parts together, we can form a python script to solve the challenge automatically. I've got around the PHP requirement by embedding the PHP files in the script, and creating them as temporary files, and running them via a subprocess to generate the payload.
 
