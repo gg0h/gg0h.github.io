@@ -3,8 +3,6 @@ layout: post
 title: HTB Business CTF 2023 - Polaris Control
 ---
 
-"During the Dark War, the Zenium State, facing resource scarcity, sought to hack into Arodor's notorious malware command and control system, Polaris Control, to gain an advantage in the Mars space race. State hackers have contacted you claiming to have spotted a small programming error by performing tedious enumeration, can you help them escalate it?"
-
 A little while back I competed in the HackTheBox Business CTF 2023 with colleagues from work. I'd like to share my solution for one of the harder challenges, Polaris Control, a "***medium***" (!?) rated web challenge. It involved chaining together multiple separate exploit steps to finally achieve RCE.
 
 ---
@@ -250,7 +248,7 @@ class Config(object):
 
 We login and navigate to our implant profile. This reveals something (that should really have been apparent on closer code inspection) when looking at the request for our implant in burp.
 
-![](assets/image/attachments/csp_reflect.png)
+[![](assets/image/attachments/csp_reflect.png)](assets/image/attachments/csp_reflect.png){:.glightbox}
 
 Our file name is reflected into the CSP via the `{img_policy}` f string variable in `csp_middleware`. Researching this type of behaviour we discover some amazing research by Gareth Heyes on [CSP Policy Injection](https://portswigger.net/research/bypassing-csp-with-policy-injection). I'll not repeat the explanation, so long story short we can use the Chrome CSP injection bypass mentioned in the article since the moderator bot instance is using chrome via selenium.
 
@@ -321,7 +319,7 @@ print(r.text)
 
 And confirm the XSS (if you are following along make sure you open in Chrome)
 
-![](assets/image/attachments/CSP_inject_confirm.png)
+[![](assets/image/attachments/CSP_inject_confirm.png)](assets/image/attachments/CSP_inject_confirm.png){:.glightbox}
 
 # Second Exploit - SQL Injection
 
@@ -671,7 +669,7 @@ print(f"Token: {token}")
 
 Updating the 'jwt' cookie in our browser with the token provided by the script we see we get an administrator session upon browsing to `/panel/network`.
 
-![](assets/image/attachments/jwtjkuadminhijack.png)
+[![](assets/image/attachments/jwtjkuadminhijack.png)](assets/image/attachments/jwtjkuadminhijack.png){:.glightbox}
 
 # Fourth Exploit - Cypher Injection
 
@@ -747,7 +745,7 @@ The exact steps I used to arrive at my final query are a blur now but I recall f
 
 confirmed by starting a listener inside the docker container to receive the request:
 
-![](assets/image/attachments/docker-nc-cathc-neo4j-ssrf.png)
+[![](assets/image/attachments/docker-nc-cathc-neo4j-ssrf.png)](assets/image/attachments/docker-nc-cathc-neo4j-ssrf.png){:.glightbox}
 
 
 # Fifth Exploit - `go:generate` directive injection
@@ -878,7 +876,7 @@ query=%27%20OR%201%3D1%20WITH%201%20as%20%5Fl00%20CALL%20dbms%2Eprocedures%28%29
 
 With this we a finally ready to perform the exploit. We start a local netcat listener on port 1234 and send the above payload to `/panel/network`.
 
-![](assets/image/attachments/polaris_rce_proof.png)
+[![](assets/image/attachments/polaris_rce_proof.png)](assets/image/attachments/polaris_rce_proof.png){:.glightbox}
 
 ### Recap
 Altogether we chained quite a number of vulnerabilities to get RCE:
