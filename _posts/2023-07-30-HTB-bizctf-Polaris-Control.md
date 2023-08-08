@@ -144,9 +144,7 @@ This renders our implant data into the Jinja template `implant.html`, let's take
 
 ```html
 # implant.html
-
-{% extends "layouts/base.html" %}
-{% block content %}
+...
 
 <script src="/static/js/implant.js"></script>
 <div id="loadingSection" class="loading-container">
@@ -182,7 +180,7 @@ This renders our implant data into the Jinja template `implant.html`, let's take
     </div>
 </div>
 
-{% endblock %} 
+...
 
 ```
 
