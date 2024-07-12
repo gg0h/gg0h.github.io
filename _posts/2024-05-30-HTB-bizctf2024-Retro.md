@@ -148,7 +148,9 @@ There were also a lot (more) unintendeds for this one I saw on discord:
 
 file name command injection + phar archive with jpg header
 @alemmi
-> phar:///path/imagename.jpeg/;/readFlag.
+```
+phar:///path/imagename.jpeg/;/readFlag.
+```
 
 `file_exists` accepts all sorts of wrappers (:
 @shvedity
