@@ -62,7 +62,7 @@ func GetServerInfo() string {
 }
 ```
 
-With that in mind let's see the `Host` header validation. There is so basic stuff I won't go into like checking the header is present and the port is valid, but the interesting part is the domain/IP validation. These are done by `isIPv4` and `isDomain` respectively. Both also call `blacklistCheck`.
+With that in mind let's see the `Host` header validation. There is some basic stuff I won't go into like checking the header is present and the port is valid, but the interesting part is the domain/IP validation. These are done by `isIPv4` and `isDomain` respectively. Both also call `blacklistCheck`.
 
 ```go
 func isIPv4(input string) bool {
