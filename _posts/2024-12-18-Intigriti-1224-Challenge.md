@@ -232,11 +232,11 @@ But what is the impact of this? I checked how `$match[0]` and `$match[1]` were u
 
 ```
 
-`$match[1]` is passed into an `unserialize` call, but now the serialized content (represented by 'aaaa') is polluted with the original "ENDCI--->" and the start of the output (represented by 'bbbb'). Thankfully the PHP serialization format is forgiving is this regard and ignores trailing garbage when doing unserialization. I've done a basic demo of this here:
+`$match[1]` is passed into an `unserialize` call, but now the serialized content (represented by 'aaaa') is polluted with the original "ENDCI--->" and the start of the output (represented by 'bbbb'). Thankfully the PHP serialization format is forgiving in this regard and ignores trailing garbage when doing unserialization. I've done a basic demo of this here:
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-serial.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-serial.png){:.glightbox}
 
-Now for `$match[0]`. It is used on the line `$this->_display(self::substr($cache, self::strlen($match[0])));`. This appears to be returning the cache content to be rendered back to the user. But this is not returning `$match[0]` itself, instead its length is used to substring the full string before `preg_match` was called. `self::substr` and `self::strlen` are just byte safe wrappers of the builtin functions, for this purpose they are essentially the same.
+Now for `$match[0]`. It is used on the line `$this->_display(self::substr($cache, self::strlen($match[0])));`. This appears to be returning the cache content to be rendered back to the user. But this is not returning `$match[0]` itself, instead the length is used to substring the full string before `preg_match` was called. `self::substr` and `self::strlen` are just byte safe wrappers of the built in functions, for this case they are essentially the same.
 
 ```php
 ...
@@ -272,7 +272,7 @@ Going back to the toy CLI example these operations would be equivalent to:
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-strlen-substr.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-strlen-substr.png){:.glightbox}
 
-The length of `$match[0]` is used the index to start the substring, meaning only 'cccc' is returned. This gave me all the pieces to create a mutation. It means if I can insert "ENDCI--->" into the HTML getting cached, then only everything after it in the original HTML document (represented by 'cccc') will get returned when it is retrieved from the cache.
+The length of `$match[0]` is used the index to start the substring, meaning only 'cccc' is returned. This gave me all the pieces to create a mutation. It meant if I could insert "ENDCI--->" into the HTML getting cached, then only everything after it in the original HTML document (represented by 'cccc') would get returned when it was retrieved from the cache.
 
 but it was not as simple as putting the constant, I still needed to navigate around the sanitization in place. A quick reminder of the important custom code:
 
@@ -327,7 +327,7 @@ class View extends CI_Controller
         <ul class="ground">
 ```
 
-The first landing spot is of no use since `htmlspecialchars` will HTML encode the '>' from "ENDCI--->", meaning I needed to use `$id`. This means working around `xss_clean` and `str2id`. 
+The first landing spot was of no use since `htmlspecialchars` will HTML encode the '>' from "ENDCI--->", meaning I needed to use `$id`. This means working around `xss_clean` and `str2id`. 
 
 The lowercasing of `str2id` can be bypassed by again abusing a regex. By beginning the input with capitalized "ENDCI" the first capturing group (`$match[0]`) will be empty, causing the `isset($match[1])` check to fail and `$match[0]` to be returned unchanged. I tested this on the CLI like so:
 
