@@ -7,7 +7,7 @@ The goal of this challenge was to achieve XSS and create an alert. The challenge
 ---
 ## Code review
 
-The challenge included source code. It was evident fairly quickly it was based on the CodeIgniter PHP framework. If all the mentions of focusing on PHP 5 weren't enough to raise some flags a close inspection of the `readme.rst` revealed it is not the latest iteration of CodeIgniter (CodeIgniter4), but the discontinued CodeIgniter3 instead.
+The challenge included source code. It was evident fairly quickly it was based on the CodeIgniter PHP framework. If all the mentions of focusing on PHP 5 weren't enough to raise some flags a close inspection of the `readme.rst` revealed it is not the latest iteration of CodeIgniter (CodeIgniter4), but the no longer developed CodeIgniter3 instead.
 
 
 ```
@@ -329,7 +329,7 @@ class View extends CI_Controller
 
 The first landing spot was of no use since `htmlspecialchars` will HTML encode the '>' from "ENDCI--->", meaning I needed to use `$id`. This means working around `xss_clean` and `str2id`. 
 
-The lowercasing of `str2id` can be bypassed by again abusing a regex. By beginning the input with capitalized "ENDCI" the first capturing group (`$match[0]`) will be empty, causing the `isset($match[1])` check to fail and `$match[0]` to be returned unchanged. I tested this on the CLI like so:
+The lowercasing of `str2id` can be bypassed by again abusing a regex. By beginning the input with capitalized "ENDCI" the first capturing group (`$match[1]`) will be empty, causing the `isset($match[1])` check to fail and `$match[0]` to be returned unchanged. I tested this on the CLI like so:
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-not-lower.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-not-lower.png){:.glightbox}
 
