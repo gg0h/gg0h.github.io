@@ -104,7 +104,7 @@ and
 
 As a quick summary, the view controller takes the `title` HTTP GET parameter, sanitizes it with the code igniter function `xss_clean`, and re-assigns it, this result is manipulated again with the above `str2id`. This function explicitly prohibits the double quote character `"`, lowercases the input, and replaces and whitespace characters with hyphens.  The sanitized `$title` and `$id` are passed to the `view.php` template and interpolated into the HTML structure as defined above, note the additional `htmlspecialchars` call on the `$title` before it is inserted into the template .
 
-`htmlspecialchars` in the text context will prevent opening any new tags and since `"` is disallowed we cannot break out of the `id` attribute.
+`htmlspecialchars` in the text context will prevent opening any new tags and since `"` is disallowed I cannot break out of the `id` attribute.
 
 I tried a few things for a while and didn't make any progress but luckily the first hint was soon released.
 
@@ -135,7 +135,7 @@ With some basic blackbox testing I confirmed from the response headers that this
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-cache60.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-cache60.png){:.glightbox}
 
-On repeated requests we verify we are accessing from the cache.
+On repeated requests I verify I am accessing from the cache.
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-December-Challenge-cache42.png)](/assets/image/attachments/2024-12-18-Intigriti-December-Challenge-cache42.png){:.glightbox}
 
@@ -149,7 +149,7 @@ A quick search revealed the correct file, `src\system\core\Output.php`.
 
 The `cache` function itself was unimportant, but immediately below I did find more relevant functions, namely `_display`, `_write_cache`, `_display_cache`, `delete_cache`, and `set_cache_header`. Together these functions more or less paint a full picture of how the view caching works. What followed next was some arduous reading of these functions to solidify my understanding (which I won't bore you with the details of) before I then started auditing the functions for ways that I could potentially alter the content returned from the cache.
 
-Something that stood out pretty quickly was the cache file format. From `_write_cache` we see:
+Something that stood out pretty quickly was the cache file format. From `_write_cache` I see:
 
 ```php
 ...
@@ -173,9 +173,9 @@ Something that stood out pretty quickly was the cache file format. From `_write_
 
 ```
 
-The cache file consists of PHP serialized cache metadata, a constant "ENDCI--->" and the output.
+The cache file consists of PHP serialized cache metadata, a constant "ENDCI--->" and the output (the HTML getting cached).
 
-later in `_display_cache` we see this "ENDCI--->" constant is used to split the serialized cache information from the cache entry when the file is being parsed from disk.
+later in `_display_cache` I see this "ENDCI--->" constant is used to split the serialized cache information from the cache entry when the file is being parsed from disk.
 
 ```php
 ...
@@ -236,7 +236,7 @@ But what is the impact of this? I checked how `$match[0]` and `$match[1]` were u
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-serial.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-serial.png){:.glightbox}
 
-Now for `$match[0]`. It is used on the line `$this->_display(self::substr($cache, self::strlen($match[0])));`. This appears to be returning the cache content to be rendered back to the user. But this is not returning `$match[0]` itself, instead its length is used to substring the full string before `preg_match` was called. `self::substr` and `self::strlen` are just byte safe wrappers of the builtin functions, for our purposes they are essentially the same.
+Now for `$match[0]`. It is used on the line `$this->_display(self::substr($cache, self::strlen($match[0])));`. This appears to be returning the cache content to be rendered back to the user. But this is not returning `$match[0]` itself, instead its length is used to substring the full string before `preg_match` was called. `self::substr` and `self::strlen` are just byte safe wrappers of the builtin functions, for this purpose they are essentially the same.
 
 ```php
 ...
@@ -329,7 +329,7 @@ class View extends CI_Controller
 
 The first landing spot is of no use since `htmlspecialchars` will HTML encode the '>' from "ENDCI--->", meaning I needed to use `$id`. This means working around `xss_clean` and `str2id`. 
 
-The lowercasing of `str2id` can be bypassed by again abusing a regex. By beginning the input with our capitalized "ENDCI" the first capturing group (`$match[0]`) will be empty, causing the `isset($match[1])` check to fail and `$match[0]` to be returned unchanged. I tested this on the CLI like so:
+The lowercasing of `str2id` can be bypassed by again abusing a regex. By beginning the input with capitalized "ENDCI" the first capturing group (`$match[0]`) will be empty, causing the `isset($match[1])` check to fail and `$match[0]` to be returned unchanged. I tested this on the CLI like so:
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-not-lower.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-not-lower.png){:.glightbox}
 
