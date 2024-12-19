@@ -173,7 +173,7 @@ Something that stood out pretty quickly was the cache file format. From `_write_
 
 ```
 
-The cache file consists of PHP serialized cache metadata, a constant "ENDCI--->" and the output (the HTML getting cached).
+The cache file consists of PHP serialized cache metadata, a constant "ENDCI--->" and the output (the HTML getting cached). The result is written to a file on the disk.
 
 later in `_display_cache` I see this "ENDCI--->" constant is used to split the serialized cache information from the cache entry when the file is being parsed from disk.
 
@@ -191,7 +191,7 @@ later in `_display_cache` I see this "ENDCI--->" constant is used to split the s
 ...
 ```
 
-Since I controlled the content of `$output` (html to be cached) in the first function, what would happen if I could write this magic "ENDCI--->" constant into the cache, what would happen when it is parsed from disk with two "ENDCI--->" entries? to confirm this I did a basic PoC on the command line, I'll repeat it here to explain the issue in detail. 'aaaa' represents the serialized cache metadata and 'bbbbcccc' represents the HTML getting cached (under my control). Due to the greedy nature of the regex, by adding "ENDCI--->" into this controlled part the regex will parse up to the second "ENDCI--->".
+Since I controlled the content of `$output` (html to be cached) in the first function, what would happen if I could write this magic "ENDCI--->" constant into the cache? what would happen when it is parsed from disk with two "ENDCI--->" entries? to confirm this I did a basic PoC on the command line, I'll repeat it here to explain the issue in detail. 'aaaa' represents the serialized cache metadata and 'bbbbcccc' represents the HTML getting cached (under my control). Due to the greedy nature of the regex, by adding "ENDCI--->" into this controlled part the regex will parse up to the second "ENDCI--->".
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-cli.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-cli.png){:.glightbox}
 
