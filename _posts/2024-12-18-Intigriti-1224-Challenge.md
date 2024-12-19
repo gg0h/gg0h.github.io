@@ -364,7 +364,7 @@ Comparing these to a list of mXSS payloads on the [PortSwigger XSS Cheat Sheet](
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-mhtmli.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-mhtmli.png){:.glightbox}
 
-I was pretty floored at the time, I was still at the blindly experimenting with payloads stage but I managed to cause a mutation. I wanted to understand what was going on before continuing so I put the page source into a `DOMParser` visualiser https://livedom.bentkowski.info/. 
+I was pretty floored at the time, I was still at the "blindly experimenting with payloads" stage but I managed to cause a mutation. I wanted to understand what was going on before continuing so I put the page source into a `DOMParser` visualiser https://livedom.bentkowski.info/. 
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-domvis.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-domvis.png){:.glightbox}
 
@@ -426,7 +426,7 @@ do
 
 I got around this using `alert.apply(null,[document.domain])`.
 
-Putting this together I had the final payload `ENDCI-- ><xmp><p id='</xmp><svg/onload=alert.apply(null,[document.domain])>'></xmp>`. I set the parameter, visited once, and after a few seconds reloaded the page and was presented with an alert.
+Putting this together I had the final payload `ENDCI-- ><xmp><p id='</xmp><svg/onload=alert.apply(null,[document.domain])>'></xmp>`. I set the parameter, visited once to set the cache entry, and after a few seconds reloaded the page and was presented with an alert.
 
 [![](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-gg.png)](/assets/image/attachments/2024-12-18-Intigriti-1224-Challenge-gg.png){:.glightbox}
 
