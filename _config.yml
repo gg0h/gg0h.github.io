@@ -6,7 +6,7 @@
 lang: "en"
 
 # Name of your site (displayed in the header)
-title: 0x67673068
+title: "0x67673068"
 
 # Short bio or description (displayed in the header)
 description: "web ctfing :p"
@@ -33,7 +33,7 @@ navigation_links:
   - title: blog
     url: /
 
-  - title: $whoami
+  - title: about
     url: /about
 
   - title: search
