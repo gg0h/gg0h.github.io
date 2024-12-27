@@ -7,11 +7,11 @@ permalink: /about/
 Hello, I'm Matthew. This is a simple blog for security topics that interest me.
 
 
-### Contact me
+### contact
 
 [gg0h@proton.me](mailto:gg0h@proton.me)
 
-### Support
+### support
 
 If you have found my posts useful consider donating.
 
